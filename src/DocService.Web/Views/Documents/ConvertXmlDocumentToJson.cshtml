@@ -1,0 +1,43 @@
+﻿@using static DocService.Web.Common.Constants;
+
+@model DocService.Web.Models.ConvertXmlDocumentToJson
+
+@{
+    ViewData["Title"] = "UploadXmlDocument";
+}
+
+<h1>UploadXmlDocument</h1>
+
+<h4>UploadDocumentViewModel</h4>
+<hr />
+@if (this.ViewData.ContainsKey(ConvertDocumentResultKey))
+{
+    <div>
+        <h5>@ViewData[ConvertDocumentResultKey]</h5>
+    </div>
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="ConvertXmlDocumentToJson" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Filename" class="control-label"></label>
+                <input asp-for="Filename" class="form-control" />
+                <span asp-validation-for="Filename" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="File" class="control-label"></label>
+                <input asp-for="File" class="form-control" />
+                <span asp-validation-for="File" class="text-danger"></span>
+            </div>
+            <div class="form-group mt-3">
+                <input type="submit" value="Convert" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
